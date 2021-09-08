@@ -3,8 +3,85 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <style>
+            *{
+                font-family: sans-serif;
+            }
+            .default-container{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin: 35px auto;
+                border: 1px solid rgb(105, 105, 105);
+                border-radius: 4px;
+                max-width: 900px !important;
+                box-shadow: rgba(0, 0, 0, 0.281) 0 5px 20px;
+            }
+            
+            .default-container,
+            button,
+            input,
+            textarea,
+            td {
+                padding: 10px;
+            }
+
+            h1,
+            h3 {
+                text-align: center;
+            }
+        </style>
+
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    <body ng-app="HelpApp">
+        <div ng-controller="ChamadoController">
+            <h1>HELP APP</h1>
+            <h3>{{usuario}}</h5>
+
+            <div class="default-container" ng-show="chamado">
+                <label for="chamadoId">ID: </label>
+                <input type="number" 
+                       id="chamadoId" 
+                       ng-model="chamado.id"
+                       disabled><br>
+
+                <label for="assunto">Assunto: </label>
+                <input type="text" id="assunto" ng-model="chamado.assunto"><br>
+
+                <label for="mensagem">Mensagem: </label>
+                <textarea rows="4" id="mensagem" ng-model="chamado.mensagem"></textarea><br>
+
+                <button type="button" ng-click="salvar()">Salvar</button>
+                <button type="button" ng-click="chamado = undefined">Cancelar</button>
+            </div>
+
+            <div class="default-container" ng-show="!chamado">
+                <button type="button" ng-click="novo()">Novo Chamado</button>
+                <table border="1">
+                    <tr>
+                        <th>ID</th>
+                        <th>Assunto</th>
+                        <th>Status</th>
+                        <th>Mensagem</th>
+                        <th>Opções</th>
+                    </tr>
+                    <tr ng-repeat="chamado in chamados">
+                        <td>{{chamado.id}}</td>
+                        <td>{{chamado.assunto}}</td>
+                        <td>{{chamado.status}}</td>
+                        <td>{{chamado.mensagem}}</td>
+                        <td>
+                            <button type="button" ng-click="alterar(chamado)">Alterar</button>
+                            <button type="button" ng-click="deletar(chamado)">Excluir</button>
+                            <button type="button" ng-if="status !== 'FECHADO'" ng-click="concluir(chamado)">Concluir</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <script src="resources/angular.js"></script>
+        <script src="resources/help.js"></script>
     </body>
 </html>
