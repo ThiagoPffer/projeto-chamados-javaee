@@ -1,5 +1,7 @@
 package com.thiagobetha.projeto.chamados.javaee.data;
 
+import com.thiagobetha.projeto.chamados.javaee.enums.chamados.Status;
+
 public class Chamado {
     
     private long id;

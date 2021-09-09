@@ -1,7 +1,7 @@
 package com.thiagobetha.projeto.chamados.javaee.controllers;
 
 import com.thiagobetha.projeto.chamados.javaee.data.Chamado;
-import com.thiagobetha.projeto.chamados.javaee.data.Status;
+import com.thiagobetha.projeto.chamados.javaee.enums.chamados.Status;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
