@@ -1,5 +1,5 @@
 var appModule = angular.module("HelpApp", []);
-appModule.value('urlBase', 'http://localhost:8080/projeto-chamados-javaee/rest/');
+appModule.value('urlBase', 'http://localhost:8080/projeto-chamados-javaee/rest');
 
 appModule.controller("ChamadoController", function ($scope, $http, urlBase) {
     $scope.usuario = 'Thiago Piffer';
@@ -19,12 +19,12 @@ appModule.controller("ChamadoController", function ($scope, $http, urlBase) {
 
         $http({
             method: metodo,
-            url: urlBase + 'chamados/',
+            url: urlBase + '/chamados',
             data: $scope.chamado
         }).then(function successCallback(response) {
             $scope.atualizarTabela();
         }, function errorCallback(response) {
-            $scope.ocorreuErro();
+            $scope.ocorreuErro(response.statusText);
         });
     };
 
@@ -37,41 +37,43 @@ appModule.controller("ChamadoController", function ($scope, $http, urlBase) {
 
         $http({
             method: 'DELETE',
-            url: urlBase + 'chamados/' + $scope.chamado.id + '/'
+            url: urlBase + '/chamados/' + $scope.chamado.id + '/'
         }).then(function successCallback(response) {
             $scope.atualizarTabela();
         }, function errorCallback(response) {
-            $scope.ocorreuErro();
+            $scope.ocorreuErro(response.statusText);
         });
     };
 
     $scope.concluir = function (chamado) {
-        $scope.chamado = chamado;
+        chamado.status = "FECHADO";
+        console.log(chamado);
 
         $http({
             method: 'PUT',
-            url: urlBase + 'chamados/' + $scope.chamado.id + '/'
+            url: urlBase + '/chamados',
+            data: chamado
         }).then(function successCallback(response) {
             console.log(response);
             $scope.atualizarTabela();
         }, function errorCallback(response) {
-            $scope.ocorreuErro();
+            $scope.ocorreuErro(response.statusText);
         });
     };
 
-    $scope.ocorreuErro = function () {
-        alert("Ocorreu um erro inesperado!");
+    $scope.ocorreuErro = function (errorMessage) {
+        alert("Ocorreu um erro inesperado: " + errorMessage);
     };
 
     $scope.atualizarTabela = function () {
         $http({
             method: 'GET',
-            url: urlBase + 'chamados/'
+            url: urlBase + '/chamados'
         }).then(function successCallback(response) {
             $scope.chamados = response.data;
             $scope.chamado = undefined;
         }, function errorCallback(response) {
-            $scope.ocorreuErro();
+            $scope.ocorreuErro(response.statusText);
         });
     };
 
