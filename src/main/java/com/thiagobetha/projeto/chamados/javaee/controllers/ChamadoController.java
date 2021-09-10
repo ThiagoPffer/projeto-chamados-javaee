@@ -1,11 +1,8 @@
 package com.thiagobetha.projeto.chamados.javaee.controllers;
 
 import com.thiagobetha.projeto.chamados.javaee.data.Chamado;
-import com.thiagobetha.projeto.chamados.javaee.data.jdbc.dao.ChamadoDAO;
 import com.thiagobetha.projeto.chamados.javaee.enums.chamados.Status;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.thiagobetha.projeto.chamados.javaee.resources.ChamadoResource;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,14 +22,14 @@ import javax.ws.rs.core.Response;
 public class ChamadoController {
     
     @Inject
-    ChamadoDAO dao;
+    ChamadoResource dao;
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Chamado> getAll(){
         try {
             return dao.listar();
-        } catch (SQLException | ClassNotFoundException exception) {
+        } catch (Exception exception) {
             Logger.getLogger(ChamadoController.class.getName()).log(Level.SEVERE, null, exception);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -44,7 +41,7 @@ public class ChamadoController {
     public Chamado getOneById(@PathParam(value = "id") long id){
         try {
             return dao.selecionar(id);
-        } catch (SQLException | ClassNotFoundException exception) {
+        } catch (Exception exception) {
             Logger.getLogger(ChamadoController.class.getName()).log(Level.SEVERE, null, exception);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -54,10 +51,9 @@ public class ChamadoController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createOne(Chamado chamado){
         try {
-            chamado.setStatus(Status.NOVO);
             dao.inserir(chamado);
             return Response.status(Response.Status.CREATED).build();
-        } catch (SQLException | ClassNotFoundException exception) {
+        } catch (Exception exception) {
             Logger.getLogger(ChamadoController.class.getName()).log(Level.SEVERE, null, exception);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -72,7 +68,7 @@ public class ChamadoController {
             }
             dao.alterar(chamado);
             return Response.status(Response.Status.OK).build();
-        } catch (SQLException | ClassNotFoundException exception) {
+        } catch (Exception exception) {
             Logger.getLogger(ChamadoController.class.getName()).log(Level.SEVERE, null, exception);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
@@ -85,7 +81,7 @@ public class ChamadoController {
         try {
             dao.excluir(id);
             return Response.status(Response.Status.OK).build();
-        } catch (SQLException | ClassNotFoundException exception) {
+        } catch (Exception exception) {
             Logger.getLogger(ChamadoController.class.getName()).log(Level.SEVERE, null, exception);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }

@@ -4,6 +4,7 @@ import com.thiagobetha.projeto.chamados.javaee.enums.chamados.Status;
 import com.thiagobetha.projeto.chamados.javaee.enums.chamados.Tipo;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,7 +29,7 @@ public class Chamado implements Serializable{
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_registro", nullable = false, updatable = false)
-    private LocalDateTime dataRegistro;
+    private Date dataRegistro;
     
     @Enumerated(EnumType.STRING)
     @Column(length = 16, nullable = false)
@@ -69,11 +70,11 @@ public class Chamado implements Serializable{
         this.id = id;
     }
 
-    public LocalDateTime getDataRegistro() {
+    public Date getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(LocalDateTime dataRegistro) {
+    public void setDataRegistro(Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 
