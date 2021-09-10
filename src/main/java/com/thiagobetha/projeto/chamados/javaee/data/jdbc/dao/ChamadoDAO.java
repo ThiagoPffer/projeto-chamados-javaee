@@ -1,5 +1,6 @@
-package com.thiagobetha.projeto.chamados.javaee.data;
+package com.thiagobetha.projeto.chamados.javaee.data.jdbc.dao;
 
+import com.thiagobetha.projeto.chamados.javaee.data.Chamado;
 import com.thiagobetha.projeto.chamados.javaee.enums.chamados.Status;
 import com.thiagobetha.projeto.chamados.javaee.infra.ConexaoJDBC;
 import com.thiagobetha.projeto.chamados.javaee.infra.ConexaoPostgresJDBC;

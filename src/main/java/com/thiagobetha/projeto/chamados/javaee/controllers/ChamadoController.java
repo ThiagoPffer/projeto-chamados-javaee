@@ -1,7 +1,7 @@
 package com.thiagobetha.projeto.chamados.javaee.controllers;
 
 import com.thiagobetha.projeto.chamados.javaee.data.Chamado;
-import com.thiagobetha.projeto.chamados.javaee.data.ChamadoDAO;
+import com.thiagobetha.projeto.chamados.javaee.data.jdbc.dao.ChamadoDAO;
 import com.thiagobetha.projeto.chamados.javaee.enums.chamados.Status;
 import java.sql.SQLException;
 import java.util.ArrayList;
