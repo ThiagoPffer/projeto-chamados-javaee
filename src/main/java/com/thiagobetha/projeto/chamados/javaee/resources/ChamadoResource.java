@@ -43,6 +43,6 @@ public class ChamadoResource {
     }
 
     public List<Chamado> listar() {
-        return em.createQuery("SELECT c FROM chamado c", Chamado.class).getResultList();
+        return em.createQuery("SELECT c FROM Chamado c", Chamado.class).getResultList();
     }
 }

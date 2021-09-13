@@ -11,7 +11,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.connection.autocommit">false</property>
 
-        <mapping class="io.github.dggodoi.aprendendo.java.backend.data.Chamado"/>
-        <mapping class="io.github.dggodoi.aprendendo.java.backend.data.Usuario"/>
+        <mapping class="com.thiagobetha.projeto.chamados.javaee.data.Chamado"/>
+        <mapping class="com.thiagobetha.projeto.chamados.javaee.data.Usuario"/>
     </session-factory>
 </hibernate-configuration>
